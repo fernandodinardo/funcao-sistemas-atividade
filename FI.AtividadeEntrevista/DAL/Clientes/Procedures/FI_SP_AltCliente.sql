@@ -1,7 +1,8 @@
 ﻿CREATE PROC FI_SP_AltCliente
     @NOME          VARCHAR (50) ,
     @SOBRENOME     VARCHAR (255),
-    @NACIONALIDADE VARCHAR (50) ,
+    @CPF           VARCHAR (11)  ,
+	@NACIONALIDADE VARCHAR (50) ,
     @CEP           VARCHAR (9)  ,
     @ESTADO        VARCHAR (2)  ,
     @CIDADE        VARCHAR (50) ,
@@ -15,8 +16,9 @@ BEGIN
 	SET 
 		NOME = @NOME, 
 		SOBRENOME = @SOBRENOME, 
+		CPF = @CPF,
 		NACIONALIDADE = @NACIONALIDADE, 
-		CEP = @CEP, 
+		CEP = @CEP,
 		ESTADO = @ESTADO, 
 		CIDADE = @CIDADE, 
 		LOGRADOURO = @LOGRADOURO, 
