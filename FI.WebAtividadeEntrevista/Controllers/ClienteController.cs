@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FI.AtividadeEntrevista.DML;
+using WebAtividadeEntrevista.Validations;
 
 namespace WebAtividadeEntrevista.Controllers
 {
@@ -38,7 +39,15 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
+                //ToDo validar CPF
+                if (!CommonValidation.ValidarCpf(model.CPF))
+                {
+                    Response.StatusCode = 400;
+                    return Json(string.Join(Environment.NewLine, new List<string> { "CPF inválido!" }));
+                }
                 
+                //ToDo validar se o CPF está cadastrado no banco
+                                
                 model.Id = bo.Incluir(new Cliente()
                 {                    
                     CEP = model.CEP,
@@ -104,6 +113,7 @@ namespace WebAtividadeEntrevista.Controllers
                 {
                     Id = cliente.Id,
                     CEP = cliente.CEP,
+                    CPF = cliente.CPF,
                     Cidade = cliente.Cidade,
                     Email = cliente.Email,
                     Estado = cliente.Estado,
