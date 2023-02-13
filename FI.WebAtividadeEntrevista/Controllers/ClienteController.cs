@@ -39,13 +39,14 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {   
+                //ToDo => Validar se o CPF é válido.
                 if (!CommonValidation.ValidarCpf(model.CPF))
                 {
                     Response.StatusCode = 400;
                     return Json(string.Join(Environment.NewLine, new List<string> { "CPF inválido!" }));
                 }
                 
-                //ToDo validar se o CPF está cadastrado no banco
+                //ToDo => Validar se o CPF está cadastrado no banco de dados.
                 if (bo.VerificarExistencia(model.CPF))
                 {
                     Response.StatusCode = 400;
