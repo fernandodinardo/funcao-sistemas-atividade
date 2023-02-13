@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FI.AtividadeEntrevista.DML;
+using WebAtividadeEntrevista.Validations;
 
 namespace WebAtividadeEntrevista.Controllers
 {
@@ -37,12 +38,25 @@ namespace WebAtividadeEntrevista.Controllers
                 return Json(string.Join(Environment.NewLine, erros));
             }
             else
-            {
+            {   
+                if (!CommonValidation.ValidarCpf(model.CPF))
+                {
+                    Response.StatusCode = 400;
+                    return Json(string.Join(Environment.NewLine, new List<string> { "CPF inválido!" }));
+                }
                 
+                //ToDo validar se o CPF está cadastrado no banco
+                if (bo.VerificarExistencia(model.CPF))
+                {
+                    Response.StatusCode = 400;
+                    return Json(string.Join(Environment.NewLine, new List<string> { "CPF já está cadastrado!" }));
+                }
+                                
                 model.Id = bo.Incluir(new Cliente()
                 {                    
                     CEP = model.CEP,
                     Cidade = model.Cidade,
+                    CPF = model.CPF,
                     Email = model.Email,
                     Estado = model.Estado,
                     Logradouro = model.Logradouro,
@@ -78,6 +92,7 @@ namespace WebAtividadeEntrevista.Controllers
                     Id = model.Id,
                     CEP = model.CEP,
                     Cidade = model.Cidade,
+                    CPF = model.CPF,
                     Email = model.Email,
                     Estado = model.Estado,
                     Logradouro = model.Logradouro,
@@ -104,6 +119,7 @@ namespace WebAtividadeEntrevista.Controllers
                 {
                     Id = cliente.Id,
                     CEP = cliente.CEP,
+                    CPF = cliente.CPF,
                     Cidade = cliente.Cidade,
                     Email = cliente.Email,
                     Estado = cliente.Estado,

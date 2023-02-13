@@ -7,9 +7,10 @@ $(document).ready(function () {
             method: "POST",
             data: {
                 "NOME": $(this).find("#Nome").val(),
-                "CEP": $(this).find("#CEP").val(),
-                "Email": $(this).find("#Email").val(),
                 "Sobrenome": $(this).find("#Sobrenome").val(),
+                "CPF": $(this).find("#Cpf").val(),
+                "CEP": $(this).find("#CEP").val(),
+                "Email": $(this).find("#Email").val(),                
                 "Nacionalidade": $(this).find("#Nacionalidade").val(),
                 "Estado": $(this).find("#Estado").val(),
                 "Cidade": $(this).find("#Cidade").val(),
